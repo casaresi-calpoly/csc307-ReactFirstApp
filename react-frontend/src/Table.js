@@ -27,6 +27,11 @@ function TableBody(props) {
     );
   }
   );
+  return (
+      <tbody>
+        {rows}
+       </tbody>
+   );
 }
 
 function Table (props) {
