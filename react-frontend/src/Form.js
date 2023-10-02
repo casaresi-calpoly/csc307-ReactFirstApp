@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 
-function Form() {
+function Form(props) {
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "job")
@@ -21,6 +21,11 @@ function Form() {
      }
   );
 
+  function submitForm() {
+    props.handleSubmit(person);
+    setPerson({name: '', job: ''});
+  }
+
 return (
     <form>
       <label htmlFor="name">Name</label>
@@ -37,6 +42,8 @@ return (
         id="job"
         value={person.job}
         onChange={handleChange} />
+      <Form handleSubmit={updateList} />
+      <input type="button" value="Submit" onClick={submitForm} />
     </form>
 ));
 }
