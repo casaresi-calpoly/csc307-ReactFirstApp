@@ -1,49 +1,12 @@
 import React from "react";
 import Table from "./Table";
 
-const characters = [
-  {
-    name: "Charlie",
-    job: "Janitor",
-  },
-  {
-    name: "Mac",
-    job: "Bouncer",
-  },
-  {
-    name: "Dee",
-    job: "Aspring actress",
-  },
-  {
-    name: "Dennis",
-    job: "Bartender",
-  },
-];
-
-
 import React, {useState} from 'react';
 import Table from './Table';
+import Form from './Form';
 
 function MyApp() {
-  const [characters, setCharacters] = useState([
-      {
-        name: "Charlie",
-        job: "Janitor",
-      },
-      {
-        name: "Mac",
-        job: "Bouncer",
-      },
-      {
-        name: "Dee",
-        job: "Aspring actress",
-      },
-      {
-        name: "Dennis",
-        job: "Bartender",
-      },
-      // the rest of the data
-    ]); 
+  const [characters, setCharacters] = useState([]);
     
   function removeOneCharacter (index) {
       const updated = characters.filter((character, i) => {
