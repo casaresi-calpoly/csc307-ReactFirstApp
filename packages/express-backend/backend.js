@@ -49,6 +49,11 @@ const findUserByName = (name) => {
         .filter( (user) => user['name'] === name); 
 }
 
+const findUserByNameAndJob = (name, job) => {
+   return users['users_list']
+      .filter( (user) => user['name'] === name && user['job'] === job);
+}
+
 const findUserById = (id) =>
     users['users_list']
         .find( (user) => user['id'] === id);
@@ -64,10 +69,18 @@ const findUserIndex = (id) => {
 
 app.get('/users', (req, res) => {
     const name = req.query.name;
+    const job = req.query.job;
     if (name != undefined){
+      if (job != undefined) {
+         let result = findUserByNameAndJob(name, job);
+         result = {users_list: result};
+         res.send(result);
+      } 
+      else {
         let result = findUserByName(name);
         result = {users_list: result};
         res.send(result);
+      }
     }
     else{
         res.send(users);
@@ -79,7 +92,8 @@ app.get('/users/:id', (req, res) => {
     let result = findUserById(id);
     if (result === undefined) {
         res.status(404).send('Resource not found.');
-    } else {
+    }
+    else {
         res.send(result);
     }
 });
@@ -95,7 +109,8 @@ app.delete('/users/:id', (req, res) => {
     let index = findUserIndex(id);
     if (index < 0) {
         res.status(404).send('Resource not found.');
-    } else {
+    }
+    else {
         users['users_list'].splice(index, 1);
         res.send();
     }
