@@ -10,11 +10,32 @@ function MyApp() {
     setCharacters([...characters, person]);
   }
 
+  function deleteUser(index) {
+    const user = characters[index];
+    const promise = fetch(`Http://localhost:8000/users/${user.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    return promise;
+  }
+
   function removeOneCharacter (index) {
-      const updated = characters.filter((character, i) => {
-          return i !== index
-      });
-    setCharacters(updated);
+    deleteUser(index)
+    .then((res) => {
+     if (res.status === 204){
+        const result = characters.filter((character, i) => {
+     return i !== index
+        });
+      setCharacters(result);
+     }  
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   function fetchUsers() {

@@ -127,6 +127,6 @@ app.delete('/users/:id', (req, res) => {
     }
     else {
         users['users_list'].splice(index, 1);
-        res.status(201).send('Successful Deletion');
+        res.status(204).send('Successful Deletion');
     }
  });
