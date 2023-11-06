@@ -116,7 +116,7 @@ app.post('/users', (req, res) => {
     const userToAdd = req.body;
     userToAdd.id = generateId();
     addUser(userToAdd);
-    res.status(201).send('Successful Insertion.');
+    res.status(201).send(JSON.stringify(userToAdd));
 });
 
 app.delete('/users/:id', (req, res) => {
