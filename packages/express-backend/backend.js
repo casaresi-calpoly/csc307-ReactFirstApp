@@ -70,6 +70,15 @@ const findUserIndex = (id) => {
         .findIndex( (user) => user['id'] === id);
 }
 
+const generateId = () => {
+    var id = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    while(findUserById(id) != undefined) {
+        id = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    }
+
+    return id
+}
+
 app.get('/users', (req, res) => {
     const name = req.query.name;
     const job = req.query.job;
@@ -105,6 +114,7 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
+    userToAdd.id = generateId();
     addUser(userToAdd);
     res.status(201).send('Successful Insertion.');
 });
